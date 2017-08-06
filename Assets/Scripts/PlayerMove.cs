@@ -17,16 +17,22 @@ public class PlayerMove : MonoBehaviour {
     {
         checkJump = false;
         move.y = 0;
-        move.x = basicMove * 0.6f;
+        if (move.x > 0)
+            move.x = basicMove * 0.6f;
+        else if (move.x < 0)
+            move.x = -basicMove * 0.6f;
+        playerColor.color = Color.white;
     }
     void OnCollisionExit2D(Collision2D coll)
     {
         checkJump = true;
+        playerColor.color = Color.red;
     }
 
     void Start ()
     {
         player = GetComponent<Rigidbody2D>();
+        playerColor = GetComponent<SpriteRenderer>();
 	}
 
     void FixedUpdate ()
